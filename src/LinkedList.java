@@ -1,22 +1,36 @@
+
+
 public class LinkedList {
     Node head;
+    Node current;
 
     public static void main(String[] args) {
 
-        LinkedList myList = new LinkedList();
-        insert(myList, 10);
-        show(myList);
-        insert(myList, 15);
-        show(myList);
-        insert(myList, 97);
-        show(myList);
+//        LinkedList myList = new LinkedList();
+//        insert(myList, 10);
+//        show(myList);
+//        insert(myList, 97);
+//        show(myList);
+//        insert(myList, 15);
+//        show(myList);
+//        insert(myList, 15);
+//        show(myList);
+        RecursiveLinkedList rList = new RecursiveLinkedList();
+        rList.insert(10);
+        rList.insert(12);
+        rList.insert(1);
+        rList.insert(15);
+        rList.insert(2);
+        rList.show();
+
+
 
     }
     private static class Node {
         public int value;
         public Node next;
         public Node(int data) {
-            this.value = data;
+            value = data;
         }
     }
 
@@ -25,12 +39,11 @@ public class LinkedList {
         //newNode.next = null;
         if ( list.head == null) {
             list.head = newNode;
+            list.current = newNode;
         }else {
-            Node last = list.head;
-            while (last.next != null) {
-                last = last.next;
-            }
-            last.next = newNode;
+            list.current.next = newNode;
+            list.current = list.current.next;
+
         }
     }
     // identify the first node of the list
