@@ -1,4 +1,4 @@
-public class RecursiveLinkedList {
+public class RecursiveLinkedList implements MyListInterface{
     private Node head;
     private static class Node{
         public int value;

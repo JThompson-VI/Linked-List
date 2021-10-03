@@ -1,30 +1,35 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 
-
-public class LinkedList {
+public class LinkedList implements MyListInterface{
     Node head;
     Node current;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-//        LinkedList myList = new LinkedList();
-//        insert(myList, 10);
-//        show(myList);
-//        insert(myList, 97);
-//        show(myList);
-//        insert(myList, 15);
-//        show(myList);
-//        insert(myList, 15);
-//        show(myList);
-        RecursiveLinkedList rList = new RecursiveLinkedList();
-        rList.insert(10);
-        rList.insert(12);
-        rList.insert(1);
-        rList.insert(15);
-        rList.insert(2);
-        rList.show();
+        MyListInterface list = new LinkedList();
 
+        String inputFile = "inputFile.txt";
 
+        File file = new File(inputFile);
+        Scanner input = new Scanner(file);
 
+        String operation;
+        int value;
+        while (input.hasNext()) {
+            Scanner nextLine = new Scanner(input.nextLine());
+            operation = nextLine.next();
+            value = nextLine.nextInt();
+
+            if (operation.equals("insert")) {
+                list.insert(value);
+            }
+        }
+        System.out.println("The complete Linked list is: ");
+        list.show();
+
+        input.close();
     }
     private static class Node {
         public int value;
@@ -34,15 +39,15 @@ public class LinkedList {
         }
     }
 
-    public static void insert(LinkedList list, int data) {
+    public void insert(int data) {
         Node newNode = new Node(data);
         //newNode.next = null;
-        if ( list.head == null) {
-            list.head = newNode;
-            list.current = newNode;
+        if (head == null) {
+            head = newNode;
+            current = newNode;
         }else {
-            list.current.next = newNode;
-            list.current = list.current.next;
+            current.next = newNode;
+            current = current.next;
 
         }
     }
@@ -52,9 +57,9 @@ public class LinkedList {
     if head not null
     while node.next != null print node.value node == node.next
      */
-    public static void show(LinkedList list) {
-        if (list.head != null) {
-            Node currentNode = list.head;
+    public void show() {
+        if (head != null) {
+            Node currentNode = head;
             while (currentNode != null) {
                 System.out.println(currentNode.value);
                 currentNode = currentNode.next;
