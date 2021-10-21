@@ -39,6 +39,7 @@ public class LinkedList implements MyListInterface{
         }
     }
 
+    @Override
     public void insert(int data) {
         Node newNode = new Node(data);
         //newNode.next = null;
@@ -51,12 +52,19 @@ public class LinkedList implements MyListInterface{
 
         }
     }
+
+    @Override
+    public void remove(int x) {
+
+    }
+
     // identify the first node of the list
     // print the data of each node and stop when current node.next == null
     /*
     if head not null
     while node.next != null print node.value node == node.next
      */
+    @Override
     public void show() {
         if (head != null) {
             Node currentNode = head;
@@ -67,4 +75,15 @@ public class LinkedList implements MyListInterface{
         }
         System.out.println("=============");
     }
+    @Override
+    public int sum() {
+        int sum = 0;
+        current = this.head;
+        while(current != null) {
+            sum += current.value;
+            current = current.next;
+        }
+        return sum;
+    }
+
 }

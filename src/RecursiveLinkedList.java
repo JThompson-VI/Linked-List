@@ -7,6 +7,7 @@ public class RecursiveLinkedList implements MyListInterface{
             value = data;
         }
     }
+    @Override
     public void insert(int value) {
         if (head == null) {head = new Node(value);} //special case when list is empty
         else {
@@ -21,10 +22,11 @@ public class RecursiveLinkedList implements MyListInterface{
         }
         return root;
     }
+    @Override
     public void remove(int value) {
 
     }
-
+    @Override
     public void show(){
         if (head != null) {
             Node currentNode = head;
@@ -34,6 +36,14 @@ public class RecursiveLinkedList implements MyListInterface{
             }
         }
     }
-
-
+    @Override
+    public int sum(){
+        return sum(this.head);
+    }
+    private int sum(Node node) {
+        if (node == null){
+            return 0;
+        }
+        return node.value + sum(node.next);
+    }
 }
