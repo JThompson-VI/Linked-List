@@ -1,5 +1,6 @@
 public class RecursiveLinkedList implements MyListInterface{
     private Node head;
+
     private static class Node{
         public int value;
         public Node next;
@@ -24,7 +25,19 @@ public class RecursiveLinkedList implements MyListInterface{
     }
     @Override
     public void remove(int value) {
-
+        remove(head, value);
+    }
+    private Node remove(Node node, int key) {
+        if (node == null) {
+            return null;
+        }
+        if (node.value != key){
+            node.next = remove(node.next, key);
+        }
+        else {
+            return node.next;
+        }
+        return node;
     }
     @Override
     public void show(){
@@ -38,12 +51,21 @@ public class RecursiveLinkedList implements MyListInterface{
     }
     @Override
     public int sum(){
-        return sum(this.head);
+        return sum(head);
     }
+
     private int sum(Node node) {
         if (node == null){
             return 0;
         }
         return node.value + sum(node.next);
+    }
+    //TODO delete this
+    public void testPrint(){
+        Node current = head;
+        System.out.println(current.value);
+        System.out.println(current.next.value);
+        current.next = current.next.next;
+        System.out.println(current.next.value);
     }
 }

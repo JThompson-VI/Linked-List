@@ -5,3 +5,7 @@ insert 100
 insert 185
 insert 117
 insert 168
+remove 99
+remove 514
+insert 100
+remove 888

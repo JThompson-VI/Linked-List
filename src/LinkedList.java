@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class LinkedList implements MyListInterface{
     Node head;
-    Node current;
 
     public static void main(String[] args) throws IOException {
 
         MyListInterface list = new LinkedList();
-
+        //TODO remove next line and uncomment the fist
+        //RecursiveLinkedList list = new RecursiveLinkedList();
         String inputFile = "inputFile.txt";
 
         File file = new File(inputFile);
@@ -24,6 +24,9 @@ public class LinkedList implements MyListInterface{
 
             if (operation.equals("insert")) {
                 list.insert(value);
+            }
+            else if (operation.equals("remove")) {
+                list.remove(value);
             }
         }
         System.out.println("The complete Linked list is: ");
@@ -41,21 +44,32 @@ public class LinkedList implements MyListInterface{
 
     @Override
     public void insert(int data) {
-        Node newNode = new Node(data);
-        //newNode.next = null;
         if (head == null) {
-            head = newNode;
-            current = newNode;
-        }else {
-            current.next = newNode;
-            current = current.next;
-
+            head = new Node(data);
+            return;
         }
+        Node currentNode = head;
+        while (currentNode.next != null){
+            currentNode = currentNode.next;
+        }
+        currentNode.next = new Node(data);
+
     }
 
     @Override
     public void remove(int x) {
-
+        if (head == null) {
+            return;
+        }
+        Node currentNode = head;
+        while (currentNode.next != null) {
+            if (currentNode.next.value == x){
+                currentNode.next = currentNode.next.next;
+                return;
+            }else {
+                currentNode = currentNode.next;
+            }
+        }
     }
 
     // identify the first node of the list
@@ -78,10 +92,10 @@ public class LinkedList implements MyListInterface{
     @Override
     public int sum() {
         int sum = 0;
-        current = this.head;
-        while(current != null) {
-            sum += current.value;
-            current = current.next;
+        Node currentNode = this.head;
+        while(currentNode != null) {
+            sum += currentNode.value;
+            currentNode = currentNode.next;
         }
         return sum;
     }
