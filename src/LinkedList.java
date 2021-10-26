@@ -7,9 +7,8 @@ public class LinkedList implements MyListInterface{
 
     public static void main(String[] args) throws IOException {
 
-        MyListInterface list = new LinkedList();
-        //TODO remove next line and uncomment the fist
-        //RecursiveLinkedList list = new RecursiveLinkedList();
+        MyListInterface list = new RecursiveLinkedList();
+
         String inputFile = "inputFile.txt";
 
         File file = new File(inputFile);
@@ -42,8 +41,8 @@ public class LinkedList implements MyListInterface{
         }
     }
 
-    @Override
-    public void insert(int data) {
+    // has a O(n) but does what the user might expect from an insert method
+    public void add(int data) {
         if (head == null) {
             head = new Node(data);
             return;
@@ -53,9 +52,19 @@ public class LinkedList implements MyListInterface{
             currentNode = currentNode.next;
         }
         currentNode.next = new Node(data);
-
     }
 
+    @Override
+    // inserts the new element at the beginning of the list and has a O(1)
+    public void insert(int key) {
+        if (head == null) {
+            head = new Node(key);
+            return;
+        }
+        Node newNode = new Node(key);
+        newNode.next = head;
+        head = newNode;
+    }
     @Override
     public void remove(int x) {
         if (head == null) {
@@ -72,12 +81,7 @@ public class LinkedList implements MyListInterface{
         }
     }
 
-    // identify the first node of the list
-    // print the data of each node and stop when current node.next == null
-    /*
-    if head not null
-    while node.next != null print node.value node == node.next
-     */
+
     @Override
     public void show() {
         if (head != null) {
